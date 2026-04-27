@@ -1,5 +1,6 @@
 import React from 'react';
 import { GraduationCap, Calendar, BookOpen, School } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Education = () => {
   const educationData = [
@@ -37,60 +38,70 @@ const Education = () => {
       <div className="container" style={{ maxWidth: '1000px' }}>
         <h2 className="section-title">Academic <span className="text-primary">Journey</span></h2>
         
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem', position: 'relative' }}>
-          {/* Vertical line for the timeline */}
-          <div style={{ position: 'absolute', left: '25px', top: '0', bottom: '0', width: '2px', background: 'var(--primary)', opacity: '0.2' }}></div>
+        <div className="timeline-container">
+          <div className="timeline-line"></div>
           
           {educationData.map((item, index) => (
-            <div key={index} style={{ position: 'relative', paddingLeft: '4rem' }}>
-              {/* Timeline marker */}
-              <div style={{ 
-                position: 'absolute', 
-                left: '0', 
-                top: '0', 
-                background: 'var(--primary)', 
-                color: 'white', 
-                padding: '0.8rem', 
-                borderRadius: '50%', 
-                display: 'flex',
-                zIndex: '1',
-                boxShadow: '0 0 0 5px rgba(99, 102, 241, 0.1)'
-              }}>
+            <motion.div 
+              key={index} 
+              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: -30 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="timeline-item"
+            >
+              <div className="timeline-marker">
                 {item.icon}
               </div>
               
-              <div className="glass" style={{ padding: '2.5rem', transition: '0.3s' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
-                  <div>
-                    <span style={{ fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--primary)' }}>
-                      {item.type}
-                    </span>
-                    <h3 style={{ fontSize: '1.6rem', fontWeight: '800', fontFamily: 'Outfit', marginTop: '0.5rem' }}>
-                      {item.course}
-                    </h3>
+              <div className="glass timeline-content">
+                <div className="timeline-header">
+                  <div className="header-main">
+                    <span className="edu-type">{item.type}</span>
+                    <h3 className="edu-course">{item.course}</h3>
                   </div>
-                  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem' }}>
-                    <span style={{ padding: '0.4rem 1rem', background: 'rgba(99, 102, 241, 0.1)', color: 'var(--primary)', borderRadius: '2rem', fontSize: '0.85rem', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div className="header-meta">
+                    <span className="edu-period">
                       <Calendar size={14} /> {item.period}
                     </span>
-                    <span style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--text)' }}>
-                      Score: {item.score}
-                    </span>
+                    <span className="edu-score">Score: {item.score}</span>
                   </div>
                 </div>
                 
-                <h4 style={{ fontSize: '1.1rem', color: 'var(--muted)', fontWeight: '600', marginBottom: '1.5rem' }}>
-                  {item.institution}
-                </h4>
-                
-                <p style={{ color: 'var(--muted)', lineHeight: '1.7', fontSize: '1.05rem' }}>
-                  {item.description}
-                </p>
+                <h4 className="edu-institution">{item.institution}</h4>
+                <p className="edu-desc">{item.description}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .timeline-container { position: relative; display: flex; flex-direction: column; gap: 3rem; }
+        .timeline-line { position: absolute; left: 25px; top: 0; bottom: 0; width: 2px; background: var(--primary); opacity: 0.2; }
+        .timeline-item { position: relative; padding-left: 4.5rem; }
+        .timeline-marker { position: absolute; left: 0; top: 0; background: var(--primary); color: white; padding: 0.8rem; borderRadius: 50%; display: flex; zIndex: 1; boxShadow: 0 0 0 5px rgba(99, 102, 241, 0.1); }
+        .timeline-content { padding: 3rem; }
+        .timeline-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem; }
+        .edu-type { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); }
+        .edu-course { font-size: 1.8rem; font-weight: 800; font-family: 'Outfit'; margin-top: 0.5rem; }
+        .header-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 0.5rem; }
+        .edu-period { padding: 0.4rem 1rem; background: rgba(99, 102, 241, 0.1); color: var(--primary); borderRadius: 2rem; fontSize: 0.85rem; fontWeight: 700; display: flex; alignItems: center; gap: 0.5rem; }
+        .edu-score { font-size: 1.1rem; fontWeight: 800; color: var(--text); }
+        .edu-institution { font-size: 1.2rem; color: var(--muted); fontWeight: 600; marginBottom: 1.5rem; }
+        .edu-desc { color: var(--muted); lineHeight: 1.7; fontSize: 1.1rem; }
+
+        @media (max-width: 768px) {
+          .timeline-item { padding-left: 3.5rem; }
+          .timeline-marker { padding: 0.6rem; }
+          .timeline-line { left: 19px; }
+          .timeline-content { padding: 2rem; }
+          .edu-course { font-size: 1.4rem; }
+          .header-meta { align-items: flex-start; }
+          .edu-score { font-size: 1rem; }
+          .edu-institution { font-size: 1rem; }
+          .edu-desc { font-size: 1rem; }
+        }
+      `}</style>
     </section>
   );
 };

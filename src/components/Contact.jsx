@@ -1,6 +1,7 @@
 import React from 'react';
 import { Send, Phone, Mail, MapPin } from 'lucide-react';
 import { LinkedinIcon } from './SocialIcons';
+import { motion } from 'framer-motion';
 
 const Contact = () => {
   return (
@@ -10,94 +11,118 @@ const Contact = () => {
         
         <div className="grid-2">
           {/* Info Side */}
-          <div className="glass" style={{ padding: '3rem' }}>
-            <h3 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '2.5rem', fontFamily: 'Outfit' }}>Contact Details</h3>
+          <motion.div 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: -30 }}
+            transition={{ duration: 0.6 }}
+            className="glass contact-info-card"
+          >
+            <h3 className="card-heading">Contact Details</h3>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                <div className="social-icon" style={{ background: 'var(--primary)', color: 'white' }}>
+            <div className="contact-details-list">
+              <div className="contact-item">
+                <div className="icon-box">
                   <Mail size={20} />
                 </div>
-                <div>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: '600' }}>Email Address</p>
-                  <a href="mailto:kishoremunis34@gmail.com" style={{ fontSize: '1.1rem', fontWeight: '700', hover: { color: 'var(--primary)' } }}>
+                <div className="contact-text">
+                  <p className="contact-label">Email Address</p>
+                  <a href="mailto:kishoremunis34@gmail.com" className="contact-link">
                     kishoremunis34@gmail.com
                   </a>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                <div className="social-icon" style={{ background: 'var(--primary)', color: 'white' }}>
+              <div className="contact-item">
+                <div className="icon-box">
                   <Phone size={20} />
                 </div>
-                <div>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: '600' }}>Phone Number</p>
-                  <a href="tel:9363300998" style={{ fontSize: '1.1rem', fontWeight: '700' }}>
+                <div className="contact-text">
+                  <p className="contact-label">Phone Number</p>
+                  <a href="tel:9363300998" className="contact-link">
                     +91 9363300998
                   </a>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                <div className="social-icon" style={{ background: 'var(--primary)', color: 'white' }}>
+              <div className="contact-item">
+                <div className="icon-box">
                   <MapPin size={20} />
                 </div>
-                <div>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: '600' }}>Location</p>
-                  <p style={{ fontSize: '1.1rem', fontWeight: '700' }}>
-                    Srivilliputhur, Tamil Nadu, India.
+                <div className="contact-text">
+                  <p className="contact-label">Location</p>
+                  <p className="contact-link">
+                    Srivilliputhur, Tamil Nadu.
                   </p>
                 </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                <div className="social-icon" style={{ background: 'var(--primary)', color: 'white' }}>
+              <div className="contact-item">
+                <div className="icon-box">
                   <LinkedinIcon size={20} />
                 </div>
-                <div>
-                  <p style={{ fontSize: '0.85rem', color: 'var(--muted)', fontWeight: '600' }}>LinkedIn Profile</p>
-                  <a href="https://www.linkedin.com/in/kishore-m-a90746316" target="_blank" rel="noreferrer" style={{ fontSize: '1.1rem', fontWeight: '700' }}>
+                <div className="contact-text">
+                  <p className="contact-label">LinkedIn Profile</p>
+                  <a href="https://www.linkedin.com/in/kishore-m-a90746316" target="_blank" rel="noreferrer" className="contact-link">
                     Connect on LinkedIn
                   </a>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Form Side */}
-          <div className="glass" style={{ padding: '3rem' }}>
-            <h3 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '2.5rem', fontFamily: 'Outfit' }}>Send Message</h3>
+          <motion.div 
+            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, x: 30 }}
+            transition={{ duration: 0.6 }}
+            className="glass contact-form-card"
+          >
+            <h3 className="card-heading">Send Message</h3>
             
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }} onSubmit={(e) => e.preventDefault()}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', borderRadius: '0.8rem', color: 'var(--text)' }}
-                />
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', borderRadius: '0.8rem', color: 'var(--text)' }}
-                />
+            <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+              <div className="form-row">
+                <input type="text" placeholder="Your Name" className="form-input" />
+                <input type="email" placeholder="Your Email" className="form-input" />
               </div>
-              <input 
-                type="text" 
-                placeholder="Subject" 
-                style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', borderRadius: '0.8rem', color: 'var(--text)' }}
-              />
-              <textarea 
-                placeholder="Your Message" 
-                rows="5" 
-                style={{ width: '100%', padding: '1rem', background: 'rgba(255,255,255,0.05)', border: '1px solid var(--border)', borderRadius: '0.8rem', color: 'var(--text)', resize: 'none' }}
-              ></textarea>
-              <button className="btn btn-primary" style={{ justifyContent: 'center', width: '100%' }}>
+              <input type="text" placeholder="Subject" className="form-input" />
+              <textarea placeholder="Your Message" rows="5" className="form-input text-area"></textarea>
+              <button className="btn btn-primary submit-btn">
                 Send Message <Send size={18} />
               </button>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        .contact-info-card, .contact-form-card { padding: 4rem; }
+        .card-heading { font-size: 2.2rem; fontWeight: 800; marginBottom: 3rem; fontFamily: 'Outfit'; }
+        .contact-details-list { display: flex; flex-direction: column; gap: 2rem; }
+        .contact-item { display: flex; align-items: center; gap: 1.5rem; }
+        .icon-box { min-width: 50px; height: 50px; background: var(--primary); color: white; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+        .contact-label { font-size: 0.85rem; color: var(--muted); fontWeight: 600; textTransform: uppercase; letterSpacing: 0.5px; }
+        .contact-link { font-size: 1.15rem; fontWeight: 700; transition: 0.3s; }
+        .contact-link:hover { color: var(--primary); }
+        
+        .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-input { width: 100%; padding: 1.2rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 1rem; color: var(--text); fontSize: 1rem; transition: 0.3s; }
+        .form-input:focus { border-color: var(--primary); outline: none; background: rgba(255,255,255,0.08); }
+        .text-area { resize: none; }
+        .submit-btn { width: 100%; justify-content: center; padding: 1.2rem; }
+
+        @media (max-width: 968px) {
+          .contact-info-card, .contact-form-card { padding: 2.5rem; }
+          .card-heading { font-size: 1.8rem; text-align: center; margin-bottom: 2rem; }
+          .contact-item { text-align: left; }
+          .form-row { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 480px) {
+          .contact-link { font-size: 1rem; }
+          .icon-box { min-width: 45px; height: 45px; }
+        }
+      `}</style>
     </section>
   );
 };

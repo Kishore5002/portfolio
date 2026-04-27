@@ -40,54 +40,73 @@ const Skills = () => {
     <section id="skills" style={{ backgroundColor: 'rgba(99, 102, 241, 0.03)' }}>
       <div className="container">
         <h2 className="section-title">My <span className="text-primary">Expertise</span></h2>
-        
-        <motion.div 
+
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          style={{ 
-            display: 'flex', 
-            gap: '2rem', 
-            overflowX: 'auto', 
-            padding: '1rem 0 3rem',
-            scrollbarWidth: 'none', /* Firefox */
-            msOverflowStyle: 'none'  /* IE and Edge */
+          style={{
+            display: 'flex',
+            gap: '1.5rem',
+            overflowX: 'auto',
+            padding: '2rem 0',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+            scrollSnapType: 'x mandatory'
           }}
-          className="skills-swipe-container"
+          className="skills-swipe-container no-scrollbar"
         >
           {skillCategories.map((cat, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               variants={itemVariants}
-              whileHover={{ y: -10, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
-              className="glass" 
-              style={{ 
-                minWidth: '350px', 
-                padding: '3rem', 
+              whileHover={{ y: -10 }}
+              className="glass"
+              style={{
+                minWidth: '280px',
+                width: '85%',
+                maxWidth: '350px',
+                padding: '2.5rem',
                 flexShrink: 0,
-                transition: '0.3s' 
+                scrollSnapAlign: 'center',
+                transition: '0.3s',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'flex-start'
               }}
             >
-              <div style={{ 
-                padding: '1.2rem', 
-                background: 'var(--primary)', 
-                color: 'white', 
-                borderRadius: '1.2rem', 
-                width: 'fit-content', 
-                marginBottom: '2rem',
-                boxShadow: '0 8px 16px rgba(99, 102, 241, 0.3)'
+              <div style={{
+                width: '50px',
+                height: '50px',
+                background: 'var(--primary)',
+                color: 'white',
+                borderRadius: '1rem',
+                marginBottom: '1.5rem',
+                boxShadow: '0 8px 16px rgba(99, 102, 241, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
               }}>
                 {cat.icon}
               </div>
               <h3 style={{ fontSize: '1.6rem', fontWeight: '800', marginBottom: '1.5rem', fontFamily: 'Outfit' }}>
                 {cat.title}
               </h3>
-              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
                 {cat.skills.map((skill, sIndex) => (
-                  <li key={sIndex} style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--muted)', fontWeight: '600' }}>
-                    <div style={{ width: '8px', height: '8px', background: 'var(--primary)', borderRadius: '50%' }}></div>
-                    {skill}
+                  <li key={sIndex} style={{ display: 'flex', alignItems: 'center', gap: '1rem', color: 'var(--muted)', fontWeight: '600', height: 'fit-content' }}>
+                    <div style={{ 
+                      width: '8px', 
+                      height: '8px', 
+                      minWidth: '8px',
+                      minHeight: '8px',
+                      background: 'var(--primary)', 
+                      borderRadius: '50%',
+                      flexShrink: 0
+                    }}></div>
+                    <span style={{ fontSize: '1.05rem' }}>{skill}</span>
                   </li>
                 ))}
               </ul>
@@ -99,7 +118,7 @@ const Skills = () => {
           <span className="md-show">← Swipe to see more →</span>
         </div>
       </div>
-      
+
       <style jsx>{`
         .skills-swipe-container::-webkit-scrollbar {
           display: none; /* Hide scrollbar for Chrome, Safari and Opera */

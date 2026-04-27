@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,7 +34,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="nav-links">
           {navLinks.map((link) => (
-            <a key={link.name} href={link.href} style={{ fontWeight: '500', transition: '0.3s' }}>
+            <a key={link.name} href={link.href} style={{ fontWeight: '600', transition: '0.3s', fontSize: '0.95rem' }}>
               {link.name}
             </a>
           ))}
@@ -42,22 +43,60 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Toggle */}
-        <div className="mobile-toggle" style={{ display: 'none' }}>
-          {/* We will implement mobile menu specifically if needed, but for now let's fix desktop */}
+        {/* Mobile Controls */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }} className="mobile-only">
+          <button onClick={toggleTheme} className="social-icon" style={{ width: '40px', height: '40px' }}>
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
+          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="social-icon" style={{ width: '40px', height: '40px', background: 'var(--primary)', color: 'white' }}>
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-        <button className="md-hide" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} style={{ display: 'none' }}>
-          <Menu />
-        </button>
       </div>
 
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{
+              position: 'fixed',
+              top: '80px',
+              left: '1.5rem',
+              right: '1.5rem',
+              background: 'var(--glass-bg)',
+              backdropFilter: 'blur(15px)',
+              padding: '2rem',
+              borderRadius: '1.5rem',
+              border: '1px solid var(--border)',
+              zIndex: '999',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '1.5rem',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+            }}
+          >
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href} 
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ fontSize: '1.2rem', fontWeight: '700', textAlign: 'center', padding: '0.5rem' }}
+              >
+                {link.name}
+              </a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       <style jsx>{`
-        @media (max-width: 768px) {
-          .nav-links { display: none; }
-          .mobile-toggle { display: block; }
+        .mobile-only { display: none; }
+        @media (max-width: 968px) {
+          .mobile-only { display: flex; }
         }
-        .md-hide { display: none; }
-        @media (max-width: 768px) { .md-hide { display: block; } }
       `}</style>
     </nav>
   );

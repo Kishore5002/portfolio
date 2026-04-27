@@ -48,7 +48,7 @@ const Projects = () => {
               style={{ overflow: 'hidden', display: 'grid', gridTemplateColumns: 'minmax(300px, 1fr) 1.2fr', gap: '0' }}
             >
               {/* Image Side */}
-              <div style={{ height: '100%', overflow: 'hidden' }}>
+              <div style={{ width: '100%', height: '100%', overflow: 'hidden', background: '#000' }}>
                 <img 
                   src={projects[currentIndex].image} 
                   alt={projects[currentIndex].title} 
@@ -57,10 +57,20 @@ const Projects = () => {
               </div>
 
               {/* Content Side */}
-              <div style={{ padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '1.5rem' }}>
+              <div className="project-content" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                <div style={{ display: 'flex', gap: '0.8rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>
                   {projects[currentIndex].tags.map(tag => (
-                    <span key={tag} style={{ fontSize: '0.75rem', fontWeight: '700', padding: '0.4rem 0.8rem', background: 'var(--primary)', color: 'white', borderRadius: '0.5rem' }}>
+                    <span key={tag} style={{ 
+                      fontSize: '0.75rem', 
+                      fontWeight: '700', 
+                      padding: '0.4rem 0.8rem', 
+                      background: 'var(--primary)', 
+                      color: 'white', 
+                      borderRadius: '0.5rem',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      height: 'fit-content'
+                    }}>
                       {tag}
                     </span>
                   ))}
@@ -112,7 +122,14 @@ const Projects = () => {
       <style jsx>{`
         @media (max-width: 768px) {
           .glass { grid-template-columns: 1fr !important; }
-          .glass div:first-child { height: 250px !important; }
+          .glass div:first-child { height: 200px !important; }
+          .project-content { padding: 2.5rem 1.5rem !important; }
+          h3 { font-size: 1.5rem !important; margin-bottom: 1rem !important; }
+          p { font-size: 0.95rem !important; line-height: 1.6 !important; }
+        }
+        @media (max-width: 480px) {
+          .project-content { padding: 2rem 1.25rem !important; }
+          h3 { font-size: 1.3rem !important; }
         }
       `}</style>
     </section>
