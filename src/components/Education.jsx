@@ -16,7 +16,7 @@ const Education = () => {
     {
       type: 'Under Graduation',
       course: 'Bachelor of Computer Applications (BCA)',
-      institution: 'Ayya Nadar Janaki Ammal College',
+      institution: 'Ayya Nadar Janakki Ammal College',
       period: '2022 — 2025',
       score: '75%',
       icon: <BookOpen size={20} />,
@@ -37,13 +37,13 @@ const Education = () => {
     <section id="education" style={{ backgroundColor: 'rgba(99, 102, 241, 0.03)' }}>
       <div className="container" style={{ maxWidth: '1000px' }}>
         <h2 className="section-title">Academic <span className="text-primary">Journey</span></h2>
-        
+
         <div className="timeline-container">
           <div className="timeline-line"></div>
-          
+
           {educationData.map((item, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               whileInView={{ opacity: 1, x: 0 }}
               initial={{ opacity: 0, x: -30 }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
@@ -52,7 +52,7 @@ const Education = () => {
               <div className="timeline-marker">
                 {item.icon}
               </div>
-              
+
               <div className="glass timeline-content">
                 <div className="timeline-header">
                   <div className="header-main">
@@ -66,7 +66,7 @@ const Education = () => {
                     <span className="edu-score">Score: {item.score}</span>
                   </div>
                 </div>
-                
+
                 <h4 className="edu-institution">{item.institution}</h4>
                 <p className="edu-desc">{item.description}</p>
               </div>
